@@ -37,9 +37,9 @@ keys.addEventListener("click", (event) => {
 
   // Handle digit buttons
   if (action === "digit") {
-    if (awaitingNextValue || justCalculated) {
+    if (waitingForSecondValue || justCalculated) {
       display.textContent = value;
-      awaitingNextValue = false;
+      waitingForSecondValue = false;
       justCalculated = false;
     } else if (display.textContent === "0") {
       display.textContent = value;
@@ -55,14 +55,14 @@ keys.addEventListener("click", (event) => {
     if (firstValue === null) {
       // first operator press after entering the first number
       firstValue = inputValue;
-    } else if (!awaitingNextValue) {
+    } else if (!waitingForSecondValue) {
       // we have a full pair → compute intermediate result (chaining)
       firstValue = calculate(firstValue, operator, inputValue);
       display.textContent = String(firstValue);
     }
     // in both cases, set/replace the operator and wait for next number
     operator = value; // value is '+', '-', '*', '/'
-    awaitingNextValue = true;
+    waitingForSecondValue = true;
     justCalculated = false; // we’re in the middle of a chain
   }
 
@@ -70,12 +70,12 @@ keys.addEventListener("click", (event) => {
   if (action === "equals") {
     const secondValue = parseFloat(display.textContent);
 
-    if (operator && firstValue !== null && !awaitingNextValue) {
+    if (operator && firstValue !== null && !waitingForSecondValue) {
       const result = calculate(firstValue, operator, secondValue);
       display.textContent = String(result);
       firstValue = result;
       operator = null;
-      awaitingNextValue = false;
+      waitingForSecondValue = false;
       justCalculated = true;
     }
   }
@@ -85,7 +85,7 @@ keys.addEventListener("click", (event) => {
     display.textContent = "0";
     firstValue = null;
     operator = null;
-    awaitingNextValue = false;
+    waitingForSecondValue = false;
     justCalculated = false;
   }
 });

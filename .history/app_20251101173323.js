@@ -37,9 +37,9 @@ keys.addEventListener("click", (event) => {
 
   // Handle digit buttons
   if (action === "digit") {
-    if (awaitingNextValue || justCalculated) {
+    if (waitingForSecondValue || justCalculated) {
       display.textContent = value;
-      awaitingNextValue = false;
+      waitingForSecondValue = false;
       justCalculated = false;
     } else if (display.textContent === "0") {
       display.textContent = value;
@@ -50,29 +50,34 @@ keys.addEventListener("click", (event) => {
 
   // Handle operator buttons
   if (action === "operator") {
-    const inputValue = parseFloat(display.textContent);
-
-    if (firstValue === null) {
-      // first operator press after entering the first number
-      firstValue = inputValue;
-    } else if (!awaitingNextValue) {
-      // we have a full pair → compute intermediate result (chaining)
-      firstValue = calculate(firstValue, operator, inputValue);
-      display.textContent = String(firstValue);
-    }
-    // in both cases, set/replace the operator and wait for next number
-    operator = value; // value is '+', '-', '*', '/'
+    operator = value;
+    firstValue = parseFloat(display.textContent);
     awaitingNextValue = true;
-    justCalculated = false; // we’re in the middle of a chain
   }
 
   // Handle equals button
   if (action === "equals") {
     const secondValue = parseFloat(display.textContent);
 
-    if (operator && firstValue !== null && !awaitingNextValue) {
-      const result = calculate(firstValue, operator, secondValue);
-      display.textContent = String(result);
+    if (operator && firstValue !== null) {
+      let result = 0;
+
+      switch (operator) {
+        case "+":
+          result = firstValue + secondValue;
+          break;
+        case "-":
+          result = firstValue - secondValue;
+          break;
+        case "*":
+          result = firstValue * secondValue;
+          break;
+        case "/":
+          result = firstValue / secondValue;
+          break;
+      }
+
+      display.textContent = result;
       firstValue = result;
       operator = null;
       awaitingNextValue = false;
@@ -86,6 +91,5 @@ keys.addEventListener("click", (event) => {
     firstValue = null;
     operator = null;
     awaitingNextValue = false;
-    justCalculated = false;
   }
 });
