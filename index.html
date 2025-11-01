@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mike's JS Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="calculator" aria-label="Calculator">
+      <div id="display" role="textbox" aria-live="polite">0</div>
+
+      <div class="keys" role="group" aria-label="Calculator keys">
+        <button data-action="clear">AC</button>
+        <button data-action="negate">+/-</button>
+        <button data-action="percent">%</button>
+        <button class="operator" data-action="operator" data-value="/">
+          ÷
+        </button>
+
+        <button data-action="digit" data-value="7">7</button>
+        <button data-action="digit" data-value="8">8</button>
+        <button data-action="digit" data-value="9">9</button>
+        <button class="operator" data-action="operator" data-value="*">
+          ×
+        </button>
+
+        <button data-action="digit" data-value="4">4</button>
+        <button data-action="digit" data-value="5">5</button>
+        <button data-action="digit" data-value="6">6</button>
+        <button class="operator" data-action="operator" data-value="-">
+          −
+        </button>
+
+        <button data-action="digit" data-value="1">1</button>
+        <button data-action="digit" data-value="2">2</button>
+        <button data-action="digit" data-value="3">3</button>
+        <button class="operator" data-action="operator" data-value="+">
+          +
+        </button>
+
+        <button class="wide" data-action="digit" data-value="0">0</button>
+        <button data-action="digit" data-value=".">.</button>
+        <button class="operator" data-action="equals">=</button>
+      </div>
+    </main>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

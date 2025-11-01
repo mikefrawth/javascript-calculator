@@ -1,0 +1,81 @@
+/* Calculator frame (optional but nice) */
+.calculator {
+  max-width: 360px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  background: #111;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+}
+
+/* Display */
+#display {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  text-align: right;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  background: #222;
+  border-radius: 12px;
+  min-height: 2.5em; /* keeps it stable as numbers change */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* 1) Grid container */
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(56px, 1fr));
+  grid-auto-rows: 56px; /* consistent row height */
+  gap: 0.5rem;
+  /* Optional: pack tighter if spans leave holes */
+  grid-auto-flow: row dense;
+}
+
+/* 2) Base button style */
+.keys button {
+  font: inherit;
+  border: none;
+  border-radius: 12px;
+  background: #333;
+  color: #fff;
+  font-size: 1.125rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.keys button:active {
+  transform: translateY(1px);
+}
+.keys button:focus-visible {
+  outline: 2px solid #6cf;
+}
+
+/* 3) Special placements */
+.keys .wide {
+  /* your "0" button */
+  grid-column: span 2;
+  aspect-ratio: auto; /* allow it to be a wide pill instead of a huge rectangle */
+}
+
+/* Optional: pin all operators to the rightmost column */
+.keys .operator {
+  /* Comment this out if you prefer auto placement */
+  grid-column: 4; /* forces ÷ × − + and = into column 4 in DOM order */
+}
+
+/* Optional: make "=" taller (classic layout) */
+.keys [data-action="equals"] {
+  /* grid-row: span 2; */ /* uncomment to make it two rows tall */
+  background: #0057ff;
+}
+
+/* Optional: top-row utilities */
+.keys [data-action="clear"],
+.keys [data-action="negate"],
+.keys [data-action="percent"] {
+  background: #444;
+}
