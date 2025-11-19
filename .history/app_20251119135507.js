@@ -64,37 +64,6 @@ function handleBackspace() {
 
 // Keyboard support1
 document.addEventListener("keydown", (event) => {
-  // When in error state, only digits and Escape (AC) should work
-  if (inErrorState) {
-    const key = event.key;
-
-    // AC
-    if (key === "Escape") {
-      const btn = keys.querySelector(`button[data-action="clear"]`);
-      if (btn) {
-        event.preventDefault();
-        btn.click();
-      }
-      return;
-    }
-
-    // DIGITS (start fresh)
-    if (key >= "0" && key <= "9") {
-      const btn = keys.querySelector(
-        `button[data-action="digit"][data-value="${key}"]`
-      );
-      if (btn) {
-        event.preventDefault();
-        btn.click();
-      }
-      return;
-    }
-
-    // Everything else ignored while in error
-    event.preventDefault();
-    return;
-  }
-
   const key = event.key;
 
   // DIGITS 0-9
@@ -245,7 +214,7 @@ keys.addEventListener("click", (event) => {
       return;
     }
 
-    // Anything else -> ignore
+    // Anything else → ignore
     return;
   }
 
@@ -312,8 +281,7 @@ keys.addEventListener("click", (event) => {
 
     if (operator && firstValue !== null && !awaitingNextValue) {
       const result = calculate(firstValue, operator, secondValue);
-      display.textContent =
-        result === "Error" ? "Error" : formatForDisplay(result);
+      display.textContent = formatForDisplay(result);
       firstValue = result;
       operator = null;
       awaitingNextValue = false;
@@ -364,8 +332,7 @@ keys.addEventListener("click", (event) => {
       result = currentValue / 100;
     }
 
-    display.textContent =
-      result === "Error" ? "Error" : formatForDisplay(result);
+    display.textContent = formatForDisplay(result);
     // After percent, we consider it a "finished" input
     awaitingNextValue = false;
     justCalculated = true;

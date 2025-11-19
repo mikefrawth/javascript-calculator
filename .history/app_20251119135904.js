@@ -364,8 +364,7 @@ keys.addEventListener("click", (event) => {
       result = currentValue / 100;
     }
 
-    display.textContent =
-      result === "Error" ? "Error" : formatForDisplay(result);
+    display.textContent = formatForDisplay(result);
     // After percent, we consider it a "finished" input
     awaitingNextValue = false;
     justCalculated = true;

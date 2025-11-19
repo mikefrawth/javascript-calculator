@@ -368,6 +368,7 @@ keys.addEventListener("click", (event) => {
       result === "Error" ? "Error" : formatForDisplay(result);
     // After percent, we consider it a "finished" input
     awaitingNextValue = false;
+    d;
     justCalculated = true;
   }
 });

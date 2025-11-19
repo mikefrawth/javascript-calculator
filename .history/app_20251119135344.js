@@ -64,37 +64,6 @@ function handleBackspace() {
 
 // Keyboard support1
 document.addEventListener("keydown", (event) => {
-  // When in error state, only digits and Escape (AC) should work
-  if (inErrorState) {
-    const key = event.key;
-
-    // AC
-    if (key === "Escape") {
-      const btn = keys.querySelector(`button[data-action="clear"]`);
-      if (btn) {
-        event.preventDefault();
-        btn.click();
-      }
-      return;
-    }
-
-    // DIGITS (start fresh)
-    if (key >= "0" && key <= "9") {
-      const btn = keys.querySelector(
-        `button[data-action="digit"][data-value="${key}"]`
-      );
-      if (btn) {
-        event.preventDefault();
-        btn.click();
-      }
-      return;
-    }
-
-    // Everything else ignored while in error
-    event.preventDefault();
-    return;
-  }
-
   const key = event.key;
 
   // DIGITS 0-9
@@ -219,36 +188,6 @@ keys.addEventListener("click", (event) => {
   const action = button.dataset.action;
   const value = button.dataset.value;
 
-  // If we're in error state:
-  // - Only AC clears it
-  // - Only digits start a fresh new number
-  if (inErrorState) {
-    if (action === "clear") {
-      // Reset everything normally
-      display.textContent = "0";
-      firstValue = null;
-      operator = null;
-      awaitingNextValue = false;
-      justCalculated = false;
-      inErrorState = false;
-      return;
-    }
-
-    if (action === "digit") {
-      // Reset display and start fresh with this digit
-      display.textContent = value;
-      firstValue = null;
-      operator = null;
-      awaitingNextValue = false;
-      justCalculated = false;
-      inErrorState = false;
-      return;
-    }
-
-    // Anything else -> ignore
-    return;
-  }
-
   // Ignore clicks that aren’t on a button
   if (!button.matches("button")) return;
 
@@ -312,8 +251,7 @@ keys.addEventListener("click", (event) => {
 
     if (operator && firstValue !== null && !awaitingNextValue) {
       const result = calculate(firstValue, operator, secondValue);
-      display.textContent =
-        result === "Error" ? "Error" : formatForDisplay(result);
+      display.textContent = formatForDisplay(result);
       firstValue = result;
       operator = null;
       awaitingNextValue = false;
@@ -364,8 +302,7 @@ keys.addEventListener("click", (event) => {
       result = currentValue / 100;
     }
 
-    display.textContent =
-      result === "Error" ? "Error" : formatForDisplay(result);
+    display.textContent = formatForDisplay(result);
     // After percent, we consider it a "finished" input
     awaitingNextValue = false;
     justCalculated = true;
