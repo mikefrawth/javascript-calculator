@@ -10,24 +10,6 @@ let operator = null;
 let awaitingNextValue = false;
 let justCalculated = false;
 
-// Helper function for rounding to avoid floating point issues
-function roundToPrecision(num) {
-  return Math.round(num * 1e12) / 1e12; // 12 decimal places is plenty
-}
-
-// Helper function to format number for display
-function formatForDisplay(num) {
-  let rounded = roundToPrecision(num);
-  let text = rounded.toString();
-
-  // If there’s a decimal, strip trailing zeros and an optional trailing dot
-  if (text.includes(".")) {
-    text = text.replace(/\.?0+$/, "");
-  }
-
-  return text;
-}
-
 // Function to perform calculations
 function calculate(a, op, b) {
   let result;
@@ -50,7 +32,7 @@ function calculate(a, op, b) {
   }
 
   // Fix floating point errors
-  return roundToPrecision(result);
+  return Math.round(result * 1e12) / 1e12;
 }
 
 // Handle "key" button clicks
@@ -100,7 +82,7 @@ keys.addEventListener("click", (event) => {
     } else if (!awaitingNextValue) {
       // we have a full pair → compute intermediate result (chaining)
       firstValue = calculate(firstValue, operator, inputValue);
-      display.textContent = formatForDisplay(firstValue);
+      display.textContent = String(firstValue);
     }
     // in both cases, set/replace the operator and wait for next number
     operator = value; // value is '+', '-', '*', '/'
@@ -116,7 +98,7 @@ keys.addEventListener("click", (event) => {
 
     if (operator && firstValue !== null && !awaitingNextValue) {
       const result = calculate(firstValue, operator, secondValue);
-      display.textContent = formatForDisplay(result);
+      display.textContent = String(result);
       firstValue = result;
       operator = null;
       awaitingNextValue = false;
@@ -167,7 +149,7 @@ keys.addEventListener("click", (event) => {
       result = currentValue / 100;
     }
 
-    display.textContent = formatForDisplay(result);
+    display.textContent = String(result);
     // After percent, we consider it a "finished" input
     awaitingNextValue = false;
     justCalculated = true;
