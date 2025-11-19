@@ -37,31 +37,7 @@ function countDigits(text) {
   return text.replace(/[^0-9]/g, "").length;
 }
 
-// Handle backspace key
-function handleBackspace() {
-  // If we're waiting for the next value (just pressed an operator),
-  // don't backspace the operator – do nothing.
-  if (awaitingNextValue) return;
-
-  // If we just finished a calculation, allow editing that result
-  if (justCalculated) {
-    justCalculated = false;
-  }
-
-  let text = display.textContent;
-
-  // If we're down to a single digit (or "-x" becoming just "-"), reset to 0
-  if (text.length <= 1 || (text.length === 2 && text.startsWith("-"))) {
-    display.textContent = "0";
-    return;
-  }
-
-  // Otherwise, remove last character
-  text = text.slice(0, -1);
-  display.textContent = text;
-}
-
-// Keyboard support1
+// Keyboard support
 document.addEventListener("keydown", (event) => {
   const key = event.key;
 
@@ -114,33 +90,6 @@ document.addEventListener("keydown", (event) => {
   // ESCAPE → AC (clear)
   if (key === "Escape") {
     const btn = keys.querySelector(`button[data-action="clear"]`);
-    if (btn) {
-      event.preventDefault();
-      btn.click();
-    }
-    return;
-  }
-
-  // BACKSPACE → delete last digit
-  if (key === "Backspace") {
-    event.preventDefault();
-    handleBackspace();
-    return;
-  }
-
-  // "%" key → percent
-  if (key === "%") {
-    const btn = keys.querySelector(`button[data-action="percent"]`);
-    if (btn) {
-      event.preventDefault();
-      btn.click();
-    }
-    return;
-  }
-
-  // Negate: allow "n"/"N" and F9 as shortcuts
-  if (key === "n" || key === "N" || key === "F9") {
-    const btn = keys.querySelector(`button[data-action="negate"]`);
     if (btn) {
       event.preventDefault();
       btn.click();

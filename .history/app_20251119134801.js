@@ -120,33 +120,6 @@ document.addEventListener("keydown", (event) => {
     }
     return;
   }
-
-  // BACKSPACE → delete last digit
-  if (key === "Backspace") {
-    event.preventDefault();
-    handleBackspace();
-    return;
-  }
-
-  // "%" key → percent
-  if (key === "%") {
-    const btn = keys.querySelector(`button[data-action="percent"]`);
-    if (btn) {
-      event.preventDefault();
-      btn.click();
-    }
-    return;
-  }
-
-  // Negate: allow "n"/"N" and F9 as shortcuts
-  if (key === "n" || key === "N" || key === "F9") {
-    const btn = keys.querySelector(`button[data-action="negate"]`);
-    if (btn) {
-      event.preventDefault();
-      btn.click();
-    }
-    return;
-  }
 });
 
 // Function to perform calculations
