@@ -93,10 +93,10 @@ keys.addEventListener("click", (event) => {
     } else if (display.textContent === "0") {
       display.textContent = value;
     } else {
-      // APPENDING to an existing number -> enforce digit limit
+      // APPENDING to an existing number → enforce digit limit
       const digitCount = countDigits(display.textContent);
       if (digitCount >= MAX_DIGITS) {
-        // Too many digits already -> ignore this input
+        // Too many digits already → ignore this input
         return;
       }
       display.textContent += value;
