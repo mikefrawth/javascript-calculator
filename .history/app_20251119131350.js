@@ -49,21 +49,9 @@ keys.addEventListener("click", (event) => {
       }
       return; // decimal handled, stop here
     }
-
-    if (awaitingNextValue || justCalculated) {
-      display.textContent = value;
-      awaitingNextValue = false;
-      justCalculated = false;
-    } else if (display.textContent === "0") {
-      display.textContent = value;
-    } else {
-      display.textContent += value;
-    }
   }
 
-  // ---------------------------
-  // OPERATORS (+, -, *, /)
-  // ---------------------------
+  // Handle operator buttons
   if (action === "operator") {
     const inputValue = parseFloat(display.textContent);
 
@@ -81,9 +69,7 @@ keys.addEventListener("click", (event) => {
     justCalculated = false; // we’re in the middle of a chain
   }
 
-  // ---------------------------
-  // EQUALS
-  // ---------------------------
+  // Handle equals button
   if (action === "equals") {
     const secondValue = parseFloat(display.textContent);
 
@@ -97,52 +83,12 @@ keys.addEventListener("click", (event) => {
     }
   }
 
-  // ---------------------------
-  // CLEAR (AC)
-  // ---------------------------
+  // Handle clear button
   if (action === "clear") {
     display.textContent = "0";
     firstValue = null;
     operator = null;
     awaitingNextValue = false;
     justCalculated = false;
-  }
-
-  // ---------------------------
-  // NEGATE (+/-)
-  // ---------------------------
-  if (action === "negate") {
-    // Don't bother if it's zero or not a number
-    if (display.textContent === "0") return;
-
-    if (display.textContent.startsWith("-")) {
-      display.textContent = display.textContent.slice(1);
-    } else {
-      display.textContent = "-" + display.textContent;
-    }
-  }
-
-  // ---------------------------
-  // PERCENT (%)
-  // ---------------------------
-  if (action === "percent") {
-    const currentValue = parseFloat(display.textContent);
-    if (isNaN(currentValue)) return;
-
-    let result;
-
-    // Common behavior: if we're in a binary op context,
-    // treat percent as "firstValue * current / 100"
-    if (firstValue !== null && operator && !awaitingNextValue) {
-      result = (firstValue * currentValue) / 100;
-    } else {
-      // Otherwise, just divide the current number by 100
-      result = currentValue / 100;
-    }
-
-    display.textContent = String(result);
-    // After percent, we consider it a "finished" input
-    awaitingNextValue = false;
-    justCalculated = true;
   }
 });
