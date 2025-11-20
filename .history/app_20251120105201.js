@@ -253,12 +253,6 @@ keys.addEventListener("click", (event) => {
   const action = button.dataset.action;
   const value = button.dataset.value;
 
-  // Ignore clicks that aren’t on a button
-  if (!button.matches("button")) return;
-
-  // Animate press
-  flashButton(button);
-
   // If we're in error state:
   // - Only AC clears it
   // - Only digits start a fresh new number

@@ -98,7 +98,6 @@ document.addEventListener("keydown", (event) => {
       const btn = keys.querySelector(`button[data-action="clear"]`);
       if (btn) {
         event.preventDefault();
-        flashButton(btn);
         btn.click();
       }
       return;
@@ -111,7 +110,6 @@ document.addEventListener("keydown", (event) => {
       );
       if (btn) {
         event.preventDefault();
-        flashButton(btn);
         btn.click();
       }
       return;
@@ -131,7 +129,6 @@ document.addEventListener("keydown", (event) => {
     );
     if (btn) {
       event.preventDefault();
-      flashButton(btn);
       btn.click();
     }
     return;
@@ -144,7 +141,6 @@ document.addEventListener("keydown", (event) => {
     );
     if (btn) {
       event.preventDefault();
-      flashButton(btn);
       btn.click();
     }
     return;
@@ -157,7 +153,6 @@ document.addEventListener("keydown", (event) => {
     );
     if (btn) {
       event.preventDefault();
-      flashButton(btn);
       btn.click();
     }
     return;
@@ -168,7 +163,6 @@ document.addEventListener("keydown", (event) => {
     const btn = keys.querySelector(`button[data-action="equals"]`);
     if (btn) {
       event.preventDefault();
-      flashButton(btn);
       btn.click();
     }
     return;
@@ -179,7 +173,6 @@ document.addEventListener("keydown", (event) => {
     const btn = keys.querySelector(`button[data-action="clear"]`);
     if (btn) {
       event.preventDefault();
-      flashButton(btn);
       btn.click();
     }
     return;
@@ -197,7 +190,6 @@ document.addEventListener("keydown", (event) => {
     const btn = keys.querySelector(`button[data-action="percent"]`);
     if (btn) {
       event.preventDefault();
-      flashButton(btn);
       btn.click();
     }
     return;
@@ -208,7 +200,6 @@ document.addEventListener("keydown", (event) => {
     const btn = keys.querySelector(`button[data-action="negate"]`);
     if (btn) {
       event.preventDefault();
-      flashButton(btn);
       btn.click();
     }
     return;
@@ -252,12 +243,6 @@ keys.addEventListener("click", (event) => {
   const button = event.target;
   const action = button.dataset.action;
   const value = button.dataset.value;
-
-  // Ignore clicks that aren’t on a button
-  if (!button.matches("button")) return;
-
-  // Animate press
-  flashButton(button);
 
   // If we're in error state:
   // - Only AC clears it
