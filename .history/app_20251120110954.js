@@ -78,7 +78,11 @@ document.addEventListener("keydown", (event) => {
     // AC
     if (key === "Escape") {
       const btn = keys.querySelector(`button[data-action="clear"]`);
-      activateButtonFromKey(event, btn);
+      if (btn) {
+        event.preventDefault();
+        flashButton(btn);
+        btn.click();
+      }
       return;
     }
 
@@ -87,7 +91,11 @@ document.addEventListener("keydown", (event) => {
       const btn = keys.querySelector(
         `button[data-action="digit"][data-value="${key}"]`
       );
-      activateButtonFromKey(event, btn);
+      if (btn) {
+        event.preventDefault();
+        flashButton(btn);
+        btn.click();
+      }
       return;
     }
 
@@ -103,7 +111,11 @@ document.addEventListener("keydown", (event) => {
     const btn = keys.querySelector(
       `button[data-action="digit"][data-value="${key}"]`
     );
-    activateButtonFromKey(event, btn);
+    if (btn) {
+      event.preventDefault();
+      flashButton(btn);
+      btn.click();
+    }
     return;
   }
 
@@ -112,7 +124,11 @@ document.addEventListener("keydown", (event) => {
     const btn = keys.querySelector(
       `button[data-action="digit"][data-value="."]`
     );
-    activateButtonFromKey(event, btn);
+    if (btn) {
+      event.preventDefault();
+      flashButton(btn);
+      btn.click();
+    }
     return;
   }
 
@@ -121,21 +137,33 @@ document.addEventListener("keydown", (event) => {
     const btn = keys.querySelector(
       `button[data-action="operator"][data-value="${key}"]`
     );
-    activateButtonFromKey(event, btn);
+    if (btn) {
+      event.preventDefault();
+      flashButton(btn);
+      btn.click();
+    }
     return;
   }
 
   // ENTER or "=" -> equals
   if (key === "Enter" || key === "=") {
     const btn = keys.querySelector(`button[data-action="equals"]`);
-    activateButtonFromKey(event, btn);
+    if (btn) {
+      event.preventDefault();
+      flashButton(btn);
+      btn.click();
+    }
     return;
   }
 
   // ESCAPE -> AC (clear)
   if (key === "Escape") {
     const btn = keys.querySelector(`button[data-action="clear"]`);
-    activateButtonFromKey(event, btn);
+    if (btn) {
+      event.preventDefault();
+      flashButton(btn);
+      btn.click();
+    }
     return;
   }
 
@@ -149,14 +177,22 @@ document.addEventListener("keydown", (event) => {
   // "%" key -> percent
   if (key === "%") {
     const btn = keys.querySelector(`button[data-action="percent"]`);
-    activateButtonFromKey(event, btn);
+    if (btn) {
+      event.preventDefault();
+      flashButton(btn);
+      btn.click();
+    }
     return;
   }
 
   // Negate: allow "n"/"N" and F9 as shortcuts
   if (key === "n" || key === "N" || key === "F9") {
     const btn = keys.querySelector(`button[data-action="negate"]`);
-    activateButtonFromKey(event, btn);
+    if (btn) {
+      event.preventDefault();
+      flashButton(btn);
+      btn.click();
+    }
     return;
   }
 });
