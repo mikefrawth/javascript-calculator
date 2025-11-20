@@ -319,9 +319,6 @@ keys.addEventListener("click", (event) => {
     operator = value; // value is '+', '-', '*', '/'
     awaitingNextValue = true;
     justCalculated = false; // we’re in the middle of a chain
-
-    // Update active operator button styling
-    setActiveOperator(button);
   }
 
   // ---------------------------
@@ -338,8 +335,6 @@ keys.addEventListener("click", (event) => {
       operator = null;
       awaitingNextValue = false;
       justCalculated = true;
-      // Clear active operator button styling
-      setActiveOperator(null);
     }
   }
 
@@ -352,9 +347,6 @@ keys.addEventListener("click", (event) => {
     operator = null;
     awaitingNextValue = false;
     justCalculated = false;
-    inErrorState = false;
-    // Clear active operator button styling
-    setActiveOperator(null);
   }
 
   // ---------------------------

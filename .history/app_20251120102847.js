@@ -63,21 +63,6 @@ function handleBackspace() {
   display.textContent = text;
 }
 
-// Function to set active operator button styling
-function setActiveOperator(button) {
-  // Clear previous
-  if (activeOperatorButton) {
-    activeOperatorButton.classList.remove("active");
-  }
-
-  activeOperatorButton = button;
-
-  // Set new
-  if (button) {
-    button.classList.add("active");
-  }
-}
-
 // Keyboard support1
 document.addEventListener("keydown", (event) => {
   // When in error state, only digits and Escape (AC) should work
@@ -310,18 +295,14 @@ keys.addEventListener("click", (event) => {
       // first operator press after entering the first number
       firstValue = inputValue;
     } else if (!awaitingNextValue) {
-      // we have a full pair -> compute intermediate result (chaining)
+      // we have a full pair → compute intermediate result (chaining)
       firstValue = calculate(firstValue, operator, inputValue);
-      display.textContent =
-        firstValue === "Error" ? "Error" : formatForDisplay(firstValue);
+      display.textContent = formatForDisplay(firstValue);
     }
     // in both cases, set/replace the operator and wait for next number
     operator = value; // value is '+', '-', '*', '/'
     awaitingNextValue = true;
     justCalculated = false; // we’re in the middle of a chain
-
-    // Update active operator button styling
-    setActiveOperator(button);
   }
 
   // ---------------------------
@@ -338,8 +319,6 @@ keys.addEventListener("click", (event) => {
       operator = null;
       awaitingNextValue = false;
       justCalculated = true;
-      // Clear active operator button styling
-      setActiveOperator(null);
     }
   }
 
@@ -352,9 +331,6 @@ keys.addEventListener("click", (event) => {
     operator = null;
     awaitingNextValue = false;
     justCalculated = false;
-    inErrorState = false;
-    // Clear active operator button styling
-    setActiveOperator(null);
   }
 
   // ---------------------------

@@ -64,12 +64,6 @@
   grid-column: 4; /* forces ÷ × − + and = into column 4 in DOM order */
 }
 
-/* Active operator highlight */
-.keys .operator.active {
-  background: #ff9500;
-  color: #000;
-}
-
 /* make "=" taller*/
 .keys [data-action="equals"] {
   background: #0057ff;

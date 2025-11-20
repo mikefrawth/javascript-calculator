@@ -338,6 +338,7 @@ keys.addEventListener("click", (event) => {
       operator = null;
       awaitingNextValue = false;
       justCalculated = true;
+
       // Clear active operator button styling
       setActiveOperator(null);
     }
@@ -352,7 +353,7 @@ keys.addEventListener("click", (event) => {
     operator = null;
     awaitingNextValue = false;
     justCalculated = false;
-    inErrorState = false;
+
     // Clear active operator button styling
     setActiveOperator(null);
   }

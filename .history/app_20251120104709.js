@@ -338,6 +338,7 @@ keys.addEventListener("click", (event) => {
       operator = null;
       awaitingNextValue = false;
       justCalculated = true;
+
       // Clear active operator button styling
       setActiveOperator(null);
     }
