@@ -158,10 +158,10 @@ const keyBindings = {
 // ---------- Keyboard support ----------
 
 document.addEventListener("keydown", (event) => {
-  const key = event.key;
-
   // ---------- Error state guard ----------
   if (inErrorState) {
+    const key = event.key;
+
     // AC
     if (key === "Escape") {
       const btn = keys.querySelector(`button[data-action="clear"]`);
